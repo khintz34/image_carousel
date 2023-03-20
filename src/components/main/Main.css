@@ -1,0 +1,54 @@
+.mainContainer {
+  height: 70vh;
+  background-color: #888;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 5vh;
+}
+
+.arrayContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.arrayDiv {
+  height: 30vh;
+  width: 20vw;
+}
+
+.buttonHolder {
+  display: flex;
+  flex-direction: row;
+  gap: 5vw;
+}
+
+.middleDiv {
+  height: 40vh;
+  z-index: 10;
+}
+
+.firstDiv {
+  transform: translateX(12vw);
+  z-index: 1;
+}
+
+.secondDiv {
+  transform: translateX(5vw);
+  z-index: 2;
+  height: 35vh;
+}
+
+.fourthDiv {
+  transform: translateX(-5vw);
+  z-index: 2;
+  height: 35vh;
+}
+
+.fifthDiv {
+  transform: translateX(-12vw);
+  z-index: 1;
+}
