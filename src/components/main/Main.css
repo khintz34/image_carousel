@@ -85,3 +85,48 @@
   max-width: 100%;
   max-height: 100%;
 }
+
+#carouselIndicatorsContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 1vw;
+}
+
+.indicator:hover {
+  transform: scale(1.1);
+  color: red;
+}
+
+.buttonContainer {
+  width: 40vw;
+  border: 4px solid black;
+  height: 8vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+}
+
+::file-selector-button:hover,
+.addImgBtn:hover {
+  color: red;
+  background-color: white;
+  border: black;
+}
+
+::file-selector-button,
+.addImgBtn {
+  background-color: black;
+  max-height: 5vh;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 8px;
+  text-align: center;
+  font-weight: 500;
+  font-family: inherit;
+  font-size: 1em;
+  cursor: pointer;
+  transition: border-color 0.25s;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: 14px;
+}

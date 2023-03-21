@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./Main.css";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { faCircle as closedCircle } from "@fortawesome/free-solid-svg-icons";
+import { faCircle as openCircle } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import boxer1 from "../../assets/photos/boxer1.jpg";
 import boxer2 from "../../assets/photos/boxer2.jpg";
@@ -10,23 +12,22 @@ import boxer5 from "../../assets/photos/boxer5.jpg";
 
 const Main = () => {
   const array = [
-    { name: "item1", color: "blue", image: boxer1 },
-    { name: "item2", color: "red", image: boxer2 },
-    { name: "item3", color: "yellow", image: boxer3 },
-    { name: "item4", color: "green", image: boxer4 },
-    { name: "item5", color: "purple", image: boxer5 },
+    { name: "eyes", color: "blue", image: boxer1, num: 0 },
+    { name: "poop", color: "red", image: boxer2, num: 1 },
+    { name: "cree", color: "yellow", image: boxer3, num: 2 },
+    { name: "puppy", color: "green", image: boxer4, num: 3 },
+    { name: "depot", color: "purple", image: boxer5, num: 4 },
   ];
 
   const [mainArray, setMainArray] = useState(array);
   const [popStatus, setPopStatus] = useState("hidePop");
-  const [popImage, setPopImage] = useState("");
   const [newImage, setNewImage] = useState([]);
-  const [imageURLs, setImageURLs] = useState([]);
+  const [viewingImage, setViewingImage] = useState(2);
+  const inputRef = useRef();
 
   const handlePop = () => {
     // popStatus === "hidePop" ? setPopStatus("showPop") : setPopStatus("hidePop");
     setPopStatus("showPop");
-    setPopImage(mainArray[2].image);
   };
 
   const closePop = () => {
@@ -42,54 +43,84 @@ const Main = () => {
     if (newImage.length < 1) return;
     let newArray = mainArray;
     let urlCreate = URL.createObjectURL(newImage);
-    console.log(newImage);
     let newObject = {
       name: newImage.name,
       color: null,
       image: urlCreate,
+      num: mainArray.length,
     };
     newArray.push(newObject);
     setMainArray([...newArray]);
+    inputRef.current.value = "";
+    setNewImage([]);
   };
 
   useEffect(() => {
     console.log("mainArray", mainArray);
   }, [mainArray]);
 
-  const moveForward = () => {
+  const moveForward = (clicked) => {
+    console.log("forward");
     let newArray = mainArray;
     newArray.push(newArray.splice(0, 1)[0]);
     setMainArray([...newArray]);
+
+    if (clicked) {
+      let newNum = viewingImage;
+      newNum++;
+      if (newNum > mainArray.length - 1) newNum = 0;
+      setViewingImage(newNum);
+    }
   };
 
-  const moveBackward = () => {
+  const moveBackward = (clicked) => {
+    console.log("backward");
     let newArray = mainArray;
     newArray.unshift(newArray.splice(-1, 1)[0]);
     setMainArray([...newArray]);
+    if (clicked) {
+      let newNum = viewingImage;
+      newNum--;
+      if (newNum < 0) newNum = mainArray.length - 1;
+      setViewingImage(newNum);
+    }
   };
 
-  const moveToMiddle = (index) => {
-    console.log(index);
+  const moveToMiddle = (index, open) => {
+    console.log(mainArray[index]);
+    setViewingImage(mainArray[index].num);
+    console.log("middle Index", index);
     if (index < 2) {
       for (let i = 0; i < 2 - index; i++) {
-        moveBackward();
+        moveBackward(false);
       }
     }
     if (index > 2) {
       for (let i = 0; i < index - 2; i++) {
-        moveForward();
+        moveForward(false);
       }
     }
-    handlePop(index);
+    if (open) handlePop(index);
+  };
+
+  const findMiddle = (i) => {
+    console.log("finding indez");
+    mainArray.map((val, index) => {
+      if (val.num === i) {
+        console.log(mainArray[index]);
+        moveToMiddle(index, false);
+      }
+    });
   };
 
   return (
     <div className="mainContainer">
       <div className="arrayContainer">
-        <button onClick={moveForward}>
+        <button onClick={() => moveForward(true)}>
           <FontAwesomeIcon icon={faArrowLeft} />
         </button>
         {mainArray.map((value, index) => {
+          if (index > 4) return;
           return (
             <div
               //   style={{ backgroundColor: value.color }}
@@ -106,27 +137,64 @@ const Main = () => {
               }
               key={`item-${value.name}`}
               onClick={() => {
-                moveToMiddle(index);
+                moveToMiddle(index, true);
               }}
             >
               <img src={value.image} alt="" className="carouselImage" />
             </div>
           );
         })}
-        <button onClick={moveBackward}>
+        <button onClick={() => moveBackward(true)}>
           <FontAwesomeIcon icon={faArrowRight} />
         </button>
       </div>
-      <div className="buttonContainer">
-        <input type="file" accept="image/*" onChange={handleImageInputs} />
-        <button onClick={handleAddImage}>Add Image</button>
+      <div id="carouselIndicatorsContainer">
+        {(() => {
+          let dots = [];
+          for (let i = 0; i < mainArray.length; i++) {
+            console.log("viewingImg: ", viewingImage);
+            if (i === viewingImage) {
+              dots.push(
+                <FontAwesomeIcon
+                  icon={closedCircle}
+                  key={`dots-${i}-closed`}
+                  className="indicator"
+                  onClick={() => findMiddle(i)}
+                />
+              );
+            } else {
+              dots.push(
+                <FontAwesomeIcon
+                  icon={openCircle}
+                  key={`dots-${i}-open`}
+                  className="indicator"
+                  onClick={() => findMiddle(i)}
+                />
+              );
+            }
+          }
+          return dots;
+        })()}
       </div>
+
       <div
         id="popUpModal"
         className={popStatus}
-        style={{ backgroundImage: `url(${popImage})` }}
+        style={{ backgroundImage: `url(${mainArray[2].image})` }}
       >
         <button onClick={closePop}>close</button>
+      </div>
+      <div className="buttonContainer">
+        <input
+          type="file"
+          id="imageAccept"
+          accept="image/*"
+          onChange={handleImageInputs}
+          ref={inputRef}
+        />
+        <button onClick={handleAddImage} className="addImgBtn">
+          Add Image
+        </button>
       </div>
     </div>
   );
