@@ -18,6 +18,8 @@
 .arrayDiv {
   height: 30vh;
   width: 20vw;
+  object-fit: contain;
+  overflow: hidden;
 }
 
 .buttonHolder {
@@ -28,7 +30,7 @@
 
 .middleDiv {
   height: 40vh;
-  z-index: 10;
+  z-index: 5;
 }
 
 .firstDiv {
@@ -51,4 +53,30 @@
 .fifthDiv {
   transform: translateX(-12vw);
   z-index: 1;
+}
+
+.arrayDiv:hover {
+  border: 5px solid black;
+}
+
+#popUpModal {
+  position: fixed;
+  top: 15vh;
+  width: 50vw;
+  height: 70vh;
+  z-index: 100;
+  /* background-color: black; */
+}
+
+.hidePop {
+  display: none;
+}
+
+.showPop {
+  display: block;
+}
+
+.carouselImage {
+  max-width: 100%;
+  max-height: 100%;
 }
