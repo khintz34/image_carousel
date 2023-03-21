@@ -19,15 +19,37 @@ const Main = () => {
 
   const [mainArray, setMainArray] = useState(array);
   const [popStatus, setPopStatus] = useState("hidePop");
-  const [popColor, setPopColor] = useState("");
+  const [popImage, setPopImage] = useState("");
+  const [newImage, setNewImage] = useState([]);
+  const [imageURLs, setImageURLs] = useState([]);
 
   const handlePop = () => {
-    popStatus === "hidePop" ? setPopStatus("showPop") : setPopStatus("hidePop");
-    setPopColor(mainArray[2].color);
+    // popStatus === "hidePop" ? setPopStatus("showPop") : setPopStatus("hidePop");
+    setPopStatus("showPop");
+    setPopImage(mainArray[2].image);
   };
 
   const closePop = () => {
     setPopStatus("hidePop");
+  };
+
+  const handleImageInputs = (e) => {
+    console.log(e.target.files[0]);
+    setNewImage(e.target.files[0]);
+  };
+
+  const handleAddImage = () => {
+    if (newImage.length < 1) return;
+    let newArray = mainArray;
+    let urlCreate = URL.createObjectURL(newImage);
+    console.log(newImage);
+    let newObject = {
+      name: newImage.name,
+      color: null,
+      image: urlCreate,
+    };
+    newArray.push(newObject);
+    setMainArray([...newArray]);
   };
 
   useEffect(() => {
@@ -64,6 +86,9 @@ const Main = () => {
   return (
     <div className="mainContainer">
       <div className="arrayContainer">
+        <button onClick={moveForward}>
+          <FontAwesomeIcon icon={faArrowLeft} />
+        </button>
         {mainArray.map((value, index) => {
           return (
             <div
@@ -88,19 +113,18 @@ const Main = () => {
             </div>
           );
         })}
-      </div>
-      <div className="buttonHolder">
-        <button onClick={moveForward}>
-          <FontAwesomeIcon icon={faArrowLeft} />
-        </button>
         <button onClick={moveBackward}>
           <FontAwesomeIcon icon={faArrowRight} />
         </button>
       </div>
+      <div className="buttonContainer">
+        <input type="file" accept="image/*" onChange={handleImageInputs} />
+        <button onClick={handleAddImage}>Add Image</button>
+      </div>
       <div
         id="popUpModal"
         className={popStatus}
-        style={{ backgroundColor: popColor }}
+        style={{ backgroundImage: `url(${popImage})` }}
       >
         <button onClick={closePop}>close</button>
       </div>
