@@ -2,7 +2,10 @@ import React, { useEffect, useState, useRef } from "react";
 import "./Main.css";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { faCircle as closedCircle } from "@fortawesome/free-solid-svg-icons";
-import { faCircle as openCircle } from "@fortawesome/free-regular-svg-icons";
+import {
+  faCircle as openCircle,
+  faCircleXmark,
+} from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import boxer1 from "../../assets/photos/boxer1.jpg";
 import boxer2 from "../../assets/photos/boxer2.jpg";
@@ -182,7 +185,11 @@ const Main = () => {
         className={popStatus}
         style={{ backgroundImage: `url(${mainArray[2].image})` }}
       >
-        <button onClick={closePop}>close</button>
+        <FontAwesomeIcon
+          icon={faCircleXmark}
+          onClick={closePop}
+          className="closePopBtn"
+        />
       </div>
       <div className="buttonContainer">
         <input
