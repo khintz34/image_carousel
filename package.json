@@ -2,6 +2,7 @@
   "name": "image_carousel",
   "private": true,
   "version": "0.0.0",
+  "homepage": "https://khintz34.github.io/image_carousel/",
   "type": "module",
   "scripts": {
     "dev": "vite",
