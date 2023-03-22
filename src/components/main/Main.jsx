@@ -38,7 +38,6 @@ const Main = () => {
   };
 
   const handleImageInputs = (e) => {
-    console.log(e.target.files[0]);
     setNewImage(e.target.files[0]);
   };
 
@@ -58,12 +57,7 @@ const Main = () => {
     setNewImage([]);
   };
 
-  useEffect(() => {
-    console.log("mainArray", mainArray);
-  }, [mainArray]);
-
   const moveForward = (clicked) => {
-    console.log("forward");
     let newArray = mainArray;
     newArray.push(newArray.splice(0, 1)[0]);
     setMainArray([...newArray]);
@@ -77,7 +71,6 @@ const Main = () => {
   };
 
   const moveBackward = (clicked) => {
-    console.log("backward");
     let newArray = mainArray;
     newArray.unshift(newArray.splice(-1, 1)[0]);
     setMainArray([...newArray]);
@@ -90,9 +83,7 @@ const Main = () => {
   };
 
   const moveToMiddle = (index, open) => {
-    console.log(mainArray[index]);
     setViewingImage(mainArray[index].num);
-    console.log("middle Index", index);
     if (index < 2) {
       for (let i = 0; i < 2 - index; i++) {
         moveBackward(false);
@@ -107,10 +98,8 @@ const Main = () => {
   };
 
   const findMiddle = (i) => {
-    console.log("finding indez");
     mainArray.map((val, index) => {
       if (val.num === i) {
-        console.log(mainArray[index]);
         moveToMiddle(index, false);
       }
     });
@@ -155,7 +144,6 @@ const Main = () => {
         {(() => {
           let dots = [];
           for (let i = 0; i < mainArray.length; i++) {
-            console.log("viewingImg: ", viewingImage);
             if (i === viewingImage) {
               dots.push(
                 <FontAwesomeIcon

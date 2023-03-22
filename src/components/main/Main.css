@@ -160,6 +160,9 @@
   .arrayContainer {
     gap: 3vw;
     overflow: hidden;
+    transform: translateX(0);
+    transition: transform 0.3s ease-out;
+    cursor: grab;
   }
 
   .controlBtn {
@@ -185,6 +188,7 @@
     height: 50vh;
     width: 80vw;
     z-index: 5;
+    user-select: none;
   }
 
   .buttonContainer {
@@ -198,5 +202,10 @@
 
   .showPop {
     display: none;
+  }
+
+  .grabbing {
+    cursor: grabbing;
+    transform: scale(0.9);
   }
 }
