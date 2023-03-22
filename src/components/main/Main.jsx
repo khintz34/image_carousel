@@ -119,7 +119,7 @@ const Main = () => {
   return (
     <div className="mainContainer">
       <div className="arrayContainer">
-        <button onClick={() => moveForward(true)}>
+        <button onClick={() => moveForward(true)} className="controlBtn">
           <FontAwesomeIcon icon={faArrowLeft} />
         </button>
         {mainArray.map((value, index) => {
@@ -147,7 +147,7 @@ const Main = () => {
             </div>
           );
         })}
-        <button onClick={() => moveBackward(true)}>
+        <button onClick={() => moveBackward(true)} className="controlBtn">
           <FontAwesomeIcon icon={faArrowRight} />
         </button>
       </div>

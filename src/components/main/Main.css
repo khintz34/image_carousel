@@ -20,6 +20,7 @@
   width: 18vw;
   object-fit: contain;
   overflow: hidden;
+  border-radius: 20px;
 }
 
 .buttonHolder {
@@ -146,4 +147,56 @@
   transition: border-color 0.25s;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   font-size: 14px;
+}
+
+@media (max-width: 500px) {
+  .mainContainer {
+    width: 100vw;
+    height: 75vh;
+    overflow: hidden;
+  }
+
+  .arrayContainer {
+    gap: 3vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .controlBtn {
+    display: none;
+  }
+
+  .firstDiv {
+    transform: translateX(0);
+  }
+
+  .secondDiv {
+    transform: translateX(0);
+  }
+
+  .fourthDiv {
+    transform: translateX(0);
+  }
+
+  .fifthDiv {
+    transform: translateX(0);
+  }
+  .arrayDiv {
+    height: 50vh;
+    width: 80vw;
+    z-index: 5;
+  }
+
+  .buttonContainer {
+    width: 80vw;
+    margin-bottom: 2vh;
+  }
+
+  #imageAccept {
+    width: 50vw;
+  }
+
+  .showPop {
+    display: none;
+  }
 }
