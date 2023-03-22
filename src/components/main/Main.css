@@ -154,11 +154,11 @@
     width: 100vw;
     height: 75vh;
     overflow: hidden;
+    gap: 3vh;
   }
 
   .arrayContainer {
     gap: 3vw;
-    height: 100vh;
     overflow: hidden;
   }
 
