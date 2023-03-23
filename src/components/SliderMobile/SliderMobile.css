@@ -11,18 +11,21 @@ body {
   justify-content: center;
   align-items: center;
   background-color: #888;
+  height: 100vh;
+  overflow: hidden;
 }
 .wrapper {
   display: flex;
   grid-gap: 1rem;
   width: 100%;
+
   overflow-x: auto;
   scroll-snap-type: x;
   cursor: grab;
   scroll-behavior: smooth;
   scrollbar-width: none; /* for firefox */
   margin-top: 5vh;
-  padding-right: 7vw;
+  padding: 0 7vw;
 }
 
 .wrapper::-webkit-scrollbar {
