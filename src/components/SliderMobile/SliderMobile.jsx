@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import "./Slider.css";
+import "./SliderMobile.css";
 
 import boxer1 from "../../assets/photos/boxer1.jpg";
 import boxer2 from "../../assets/photos/boxer2.jpg";
@@ -7,23 +7,15 @@ import boxer3 from "../../assets/photos/boxer3.jpg";
 import boxer4 from "../../assets/photos/boxer4.jpg";
 import boxer5 from "../../assets/photos/boxer5.jpg";
 import SliderImageMobile from "../resuse/sliderImage-mobile/SliderImageMobile";
+import { imageArray } from "../../assets/OriginalArray/OriginalArray";
 
 const Slider = () => {
-  const imageArray = [
-    { name: "eyes", image: boxer1, num: 0 },
-    { name: "poop", image: boxer2, num: 1 },
-    { name: "cree", image: boxer3, num: 2 },
-    { name: "puppy", image: boxer4, num: 3 },
-    { name: "depot", image: boxer5, num: 4 },
-  ];
   const [pressed, setPressed] = useState(false);
   const [startX, setStartX] = useState(0);
-  const [cursor, setCursor] = useState("cursor");
   const wrapperRef = useRef();
   const inputRef = useRef();
   const [mainArray, setMainArray] = useState(imageArray);
   const [newImage, setNewImage] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
 
   const handleImageInputs = (e) => {
     setNewImage(e.target.files[0]);

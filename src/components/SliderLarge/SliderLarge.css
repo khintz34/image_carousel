@@ -149,6 +149,36 @@
   font-size: 14px;
 }
 
+@media (max-width: 1000px) and (min-width: 501px) {
+  .arrayDiv {
+    height: 40vh;
+    width: 30vw;
+  }
+
+  .mainContainer {
+    height: 80vh;
+  }
+
+  .middleDiv {
+    height: 45vh;
+    width: 35vw;
+  }
+
+  .buttonContainer {
+    width: 60vw;
+    padding: 2vw;
+  }
+
+  .controlBtn {
+    margin: -8vw;
+  }
+
+  ::file-selector-button,
+  .addImgBtn {
+    width: 15vw;
+  }
+}
+
 @media (max-width: 500px) {
   .mainContainer {
     width: 100vw;

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import "./Main.css";
+import "./SliderLarge.css";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { faCircle as closedCircle } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -7,26 +7,16 @@ import {
   faCircleXmark,
 } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import boxer1 from "../../assets/photos/boxer1.jpg";
-import boxer2 from "../../assets/photos/boxer2.jpg";
-import boxer3 from "../../assets/photos/boxer3.jpg";
-import boxer4 from "../../assets/photos/boxer4.jpg";
-import boxer5 from "../../assets/photos/boxer5.jpg";
+import { imageArray as array } from "../../assets/OriginalArray/OriginalArray";
 
-const Main = () => {
-  const array = [
-    { name: "eyes", color: "blue", image: boxer1, num: 0 },
-    { name: "poop", color: "red", image: boxer2, num: 1 },
-    { name: "cree", color: "yellow", image: boxer3, num: 2 },
-    { name: "puppy", color: "green", image: boxer4, num: 3 },
-    { name: "depot", color: "purple", image: boxer5, num: 4 },
-  ];
-
+const SliderLarge = () => {
   const [mainArray, setMainArray] = useState(array);
   const [popStatus, setPopStatus] = useState("hidePop");
   const [newImage, setNewImage] = useState([]);
   const [viewingImage, setViewingImage] = useState(2);
   const inputRef = useRef();
+  const [screenWidth, setScreenWidth] = useState(screen.width);
+  const [middleDiv, setMiddleDiv] = useState(2);
 
   const handlePop = () => {
     // popStatus === "hidePop" ? setPopStatus("showPop") : setPopStatus("hidePop");
@@ -36,6 +26,13 @@ const Main = () => {
   const closePop = () => {
     setPopStatus("hidePop");
   };
+
+  useEffect(() => {
+    if (screenWidth < 1000) {
+      setMiddleDiv(1);
+      setViewingImage(1);
+    }
+  }, []);
 
   const handleImageInputs = (e) => {
     setNewImage(e.target.files[0]);
@@ -84,13 +81,13 @@ const Main = () => {
 
   const moveToMiddle = (index, open) => {
     setViewingImage(mainArray[index].num);
-    if (index < 2) {
-      for (let i = 0; i < 2 - index; i++) {
+    if (index < middleDiv) {
+      for (let i = 0; i < middleDiv - index; i++) {
         moveBackward(false);
       }
     }
-    if (index > 2) {
-      for (let i = 0; i < index - 2; i++) {
+    if (index > middleDiv) {
+      for (let i = 0; i < index - middleDiv; i++) {
         moveForward(false);
       }
     }
@@ -112,10 +109,29 @@ const Main = () => {
           <FontAwesomeIcon icon={faArrowLeft} />
         </button>
         {mainArray.map((value, index) => {
+          if (screenWidth < 1000) {
+            if (index > 2) return;
+            return (
+              <div
+                className={
+                  index === 0
+                    ? "arrayDiv firstDiv"
+                    : index === 1
+                    ? "arrayDiv middleDiv"
+                    : "arrayDiv fifthDiv"
+                }
+                key={`item-${value.name}`}
+                onClick={() => {
+                  moveToMiddle(index, false);
+                }}
+              >
+                <img src={value.image} alt="" className="carouselImage" />
+              </div>
+            );
+          }
           if (index > 4) return;
           return (
             <div
-              //   style={{ backgroundColor: value.color }}
               className={
                 index === 0
                   ? "arrayDiv firstDiv"
@@ -171,7 +187,7 @@ const Main = () => {
       <div
         id="popUpModal"
         className={popStatus}
-        style={{ backgroundImage: `url(${mainArray[2].image})` }}
+        style={{ backgroundImage: `url(${mainArray[middleDiv].image})` }}
       >
         <FontAwesomeIcon
           icon={faCircleXmark}
@@ -195,4 +211,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default SliderLarge;

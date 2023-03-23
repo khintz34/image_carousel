@@ -1,4 +1,4 @@
-import "../../Slider/Slider.css";
+import "../../SliderMobile/SliderMobile.css";
 
 const SliderImageMobile = (props) => {
   return (

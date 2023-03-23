@@ -21,6 +21,7 @@ body {
   cursor: grab;
   scroll-behavior: smooth;
   scrollbar-width: none; /* for firefox */
+  margin-top: 5vh;
 }
 
 .wrapper::-webkit-scrollbar {

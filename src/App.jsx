@@ -1,10 +1,14 @@
 import "./App.css";
-import Main from "./components/main/Main";
-import Slider from "./components/Slider/Slider";
+import SliderLarge from "./components/SliderLarge/SliderLarge";
+import SliderMobile from "./components/SliderMobile/SliderMobile";
 
 function App() {
   const width = screen.width;
-  return <div className="App">{width < 500 ? <Slider /> : <Main />}</div>;
+  return (
+    <div className="App">
+      {width < 500 ? <SliderMobile /> : <SliderLarge />}
+    </div>
+  );
 }
 
 export default App;
