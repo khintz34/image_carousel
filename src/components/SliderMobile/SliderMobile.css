@@ -22,7 +22,7 @@ body {
   scroll-behavior: smooth;
   scrollbar-width: none; /* for firefox */
   margin-top: 5vh;
-  padding-right: 5vw;
+  padding-right: 7vw;
 }
 
 .wrapper::-webkit-scrollbar {
