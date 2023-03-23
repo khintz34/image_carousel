@@ -6,6 +6,7 @@ import boxer2 from "../../assets/photos/boxer2.jpg";
 import boxer3 from "../../assets/photos/boxer3.jpg";
 import boxer4 from "../../assets/photos/boxer4.jpg";
 import boxer5 from "../../assets/photos/boxer5.jpg";
+import SliderImageMobile from "../resuse/sliderImage-mobile/SliderImageMobile";
 
 const Slider = () => {
   const imageArray = [
@@ -44,40 +45,31 @@ const Slider = () => {
     setNewImage([]);
   };
 
-  const checkPositions = (e, index) => {
-    const position = e.target.getBoundingClientRect();
-
-    if (position.top >= 0 && position.bottom <= window.innerHeight) {
-      setCurrentIndex(index + 1);
-      console.log("yes");
-    }
-  };
-
   return (
     <div id="sliderContainer">
       <div
         ref={wrapperRef}
         className="wrapper"
-        onMouseDown={(e) => {
-          setPressed(true);
-          setStartX(e.clientX);
-          setCursor("grabbing");
-          //   console.log(e);
-        }}
-        onMouseLeave={(e) => {
-          setPressed(false);
-        }}
-        onMouseUp={(e) => {
-          setPressed(false);
-          setCursor("grab");
-        }}
-        onMouseMove={(e) => {
-          if (!pressed) {
-            return;
-          }
+        // onMouseDown={(e) => {
+        //   setPressed(true);
+        //   setStartX(e.clientX);
+        //   setCursor("grabbing");
+        //   //   console.log(e);
+        // }}
+        // onMouseLeave={(e) => {
+        //   setPressed(false);
+        // }}
+        // onMouseUp={(e) => {
+        //   setPressed(false);
+        //   setCursor("grab");
+        // }}
+        // onMouseMove={(e) => {
+        //   if (!pressed) {
+        //     return;
+        //   }
 
-          wrapperRef.scrollLeft += startX - e.clientX;
-        }}
+        //   wrapperRef.scrollLeft += startX - e.clientX;
+        // }}
         onTouchEnd={(e) => {
           setPressed(false);
         }}
@@ -95,35 +87,20 @@ const Slider = () => {
         }}
       >
         {mainArray.map((val, index) => {
+          let extraClass;
           if (index === 0) {
-            return (
-              <div
-                key={val.name + "slider"}
-                className="slider firstImage"
-                onClick={(e) => checkPositions(e, index)}
-              >
-                <img src={val.image} alt="" className="carouselImage" />
-              </div>
-            );
+            extraClass = "firstImage";
           } else if (index === mainArray.length - 1) {
-            return (
-              <div
-                key={val.name + "slider"}
-                className="slider lastImage"
-                onClick={(e) => checkPositions(e, index)}
-              >
-                <img src={val.image} alt="" className="carouselImage" />
-              </div>
-            );
+            extraClass = "lastImage";
           }
+
           return (
-            <div
-              key={val.name + "slider"}
-              className="slider"
-              onClick={(e) => checkPositions(e, index)}
-            >
-              <img src={val.image} alt="" className="carouselImage" />
-            </div>
+            <SliderImageMobile
+              name={val.name}
+              extraClass={extraClass}
+              image={val.image}
+              key={val.name + "sliderMobile"}
+            />
           );
         })}
       </div>

@@ -15,15 +15,12 @@ body {
 .wrapper {
   display: flex;
   grid-gap: 1rem;
-  /* max-width: 768px; */
   width: 100%;
   overflow-x: auto;
   scroll-snap-type: x;
   cursor: grab;
   scroll-behavior: smooth;
   scrollbar-width: none; /* for firefox */
-  /* padding-right: 5vw;
-  padding-left: 5vw; */
 }
 
 .wrapper::-webkit-scrollbar {
