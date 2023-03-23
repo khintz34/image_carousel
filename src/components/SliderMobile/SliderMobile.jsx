@@ -1,11 +1,5 @@
 import { useState, useRef } from "react";
 import "./SliderMobile.css";
-
-import boxer1 from "../../assets/photos/boxer1.jpg";
-import boxer2 from "../../assets/photos/boxer2.jpg";
-import boxer3 from "../../assets/photos/boxer3.jpg";
-import boxer4 from "../../assets/photos/boxer4.jpg";
-import boxer5 from "../../assets/photos/boxer5.jpg";
 import SliderImageMobile from "../resuse/sliderImage-mobile/SliderImageMobile";
 import { imageArray } from "../../assets/OriginalArray/OriginalArray";
 
@@ -42,26 +36,6 @@ const Slider = () => {
       <div
         ref={wrapperRef}
         className="wrapper"
-        // onMouseDown={(e) => {
-        //   setPressed(true);
-        //   setStartX(e.clientX);
-        //   setCursor("grabbing");
-        //   //   console.log(e);
-        // }}
-        // onMouseLeave={(e) => {
-        //   setPressed(false);
-        // }}
-        // onMouseUp={(e) => {
-        //   setPressed(false);
-        //   setCursor("grab");
-        // }}
-        // onMouseMove={(e) => {
-        //   if (!pressed) {
-        //     return;
-        //   }
-
-        //   wrapperRef.scrollLeft += startX - e.clientX;
-        // }}
         onTouchEnd={(e) => {
           setPressed(false);
         }}
