@@ -162,7 +162,6 @@
     overflow: hidden;
     transform: translateX(0);
     transition: transform 0.3s ease-out;
-    cursor: grab;
   }
 
   .controlBtn {
@@ -202,10 +201,5 @@
 
   .showPop {
     display: none;
-  }
-
-  .grabbing {
-    cursor: grabbing;
-    transform: scale(0.9);
   }
 }
