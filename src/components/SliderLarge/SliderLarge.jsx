@@ -19,7 +19,6 @@ const SliderLarge = () => {
   const [middleDiv, setMiddleDiv] = useState(2);
 
   const handlePop = () => {
-    // popStatus === "hidePop" ? setPopStatus("showPop") : setPopStatus("hidePop");
     setPopStatus("showPop");
   };
 
